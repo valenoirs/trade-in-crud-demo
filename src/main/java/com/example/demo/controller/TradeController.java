@@ -18,8 +18,11 @@ import java.util.List;
 @RestController
 public class TradeController {
 
-    @Autowired
-    private TradeService tradeService;
+    private final TradeService tradeService;
+
+    TradeController(TradeService tradeService){
+        this.tradeService = tradeService;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(

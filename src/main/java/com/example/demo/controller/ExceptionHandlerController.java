@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
-public class ErrorController {
+public class ExceptionHandlerController {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<WebResponse<String>> constraintViolationException(ConstraintViolationException exception) {

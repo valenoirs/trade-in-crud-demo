@@ -20,11 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class TradeService implements ITradeService {
 
-    @Autowired
-    private TradeRepository tradeRepository;
+    private final TradeRepository tradeRepository;
+    private final ValidationService validationService;
 
-    @Autowired
-    private ValidationService validationService;
+    TradeService(TradeRepository tradeRepository, ValidationService validationService) {
+        this.tradeRepository = tradeRepository;
+        this.validationService = validationService;
+    }
 
     @Transactional
     @Override

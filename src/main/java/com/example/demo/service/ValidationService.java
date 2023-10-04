@@ -11,8 +11,11 @@ import java.util.Set;
 @Service
 public class ValidationService {
 
-    @Autowired
-    private Validator validator;
+    final private Validator validator;
+
+    ValidationService(Validator validator){
+        this.validator = validator;
+    }
 
     public void validate(Object request){
         Set<ConstraintViolation<Object>> violation = validator.validate(request);
