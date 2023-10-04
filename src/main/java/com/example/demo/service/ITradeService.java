@@ -14,9 +14,9 @@ public interface ITradeService {
 
     public TradeUpdateResponse update(TradeUpdateRequest request);
 
-    public GetTradeResponse get(String tradeId);
+    public GetTradeResponse findById(String tradeId);
 
-    public List<GetTradeResponse> list();
+    public List<GetTradeResponse> findAll();
 
     public void delete(String tradeId);
 }

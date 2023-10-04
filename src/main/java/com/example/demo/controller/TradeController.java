@@ -7,6 +7,7 @@ import com.example.demo.model.response.TradeCreateResponse;
 import com.example.demo.model.response.TradeUpdateResponse;
 import com.example.demo.model.response.WebResponse;
 import com.example.demo.service.TradeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +27,7 @@ public class TradeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private WebResponse<TradeCreateResponse> create(@RequestBody TradeCreateRequest request){
+    private WebResponse<TradeCreateResponse> create(@Valid @RequestBody TradeCreateRequest request){
         TradeCreateResponse response = tradeService.create(request);
 
         return WebResponse.<TradeCreateResponse>builder()
@@ -42,7 +43,7 @@ public class TradeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private WebResponse<TradeUpdateResponse> update(@RequestBody TradeUpdateRequest request){
+    private WebResponse<TradeUpdateResponse> update(@Valid @RequestBody TradeUpdateRequest request){
         TradeUpdateResponse response = tradeService.update(request);
 
         return WebResponse.<TradeUpdateResponse>builder()
@@ -56,8 +57,8 @@ public class TradeController {
             path = "api/v1/trades",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private WebResponse<List<GetTradeResponse>> list(){
-        List<GetTradeResponse> tradeResponseList = tradeService.list();
+    private WebResponse<List<GetTradeResponse>> findAll(){
+        List<GetTradeResponse> tradeResponseList = tradeService.findAll();
 
         return WebResponse.<List<GetTradeResponse>>builder().data(tradeResponseList).build();
     }
@@ -67,8 +68,8 @@ public class TradeController {
             path = "api/v1/trades/{tradeId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private WebResponse<GetTradeResponse> get(@PathVariable("tradeId") String tradeId){
-        GetTradeResponse tradeResponse = tradeService.get(tradeId);
+    private WebResponse<GetTradeResponse> findById(@Valid @PathVariable("tradeId") String tradeId){
+        GetTradeResponse tradeResponse = tradeService.findById(tradeId);
 
         return WebResponse.<GetTradeResponse>builder().data(tradeResponse).build();
     }

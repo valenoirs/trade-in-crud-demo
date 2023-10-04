@@ -81,7 +81,7 @@ public class TradeService implements ITradeService {
 
     @Transactional(readOnly = true)
     @Override
-    public GetTradeResponse get(String tradeId){
+    public GetTradeResponse findById(String tradeId){
         Trade trade = tradeRepository.findById(tradeId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Trade not found"));
 
@@ -90,10 +90,18 @@ public class TradeService implements ITradeService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<GetTradeResponse> list() {
+    public List<GetTradeResponse> findAll() {
         List<Trade> trades = tradeRepository.findAll();
 
         return trades.stream().map(this::createTradeResponse).toList();
+    }
+
+    @Transactional
+    public void delete(String tradeId){
+        Trade contact = tradeRepository.findById(tradeId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contact not found"));
+
+        tradeRepository.delete(contact);
     }
 
     private GetTradeResponse createTradeResponse(Trade trade){
@@ -114,14 +122,5 @@ public class TradeService implements ITradeService {
                 .color(trade.getColor())
                 .inspectionLocation(trade.getInspectionLocation())
                 .build();
-    }
-
-
-    @Transactional
-    public void delete(String tradeId){
-        Trade contact = tradeRepository.findById(tradeId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contact not found"));
-
-        tradeRepository.delete(contact);
     }
 }
