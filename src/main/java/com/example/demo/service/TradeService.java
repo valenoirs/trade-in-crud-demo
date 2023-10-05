@@ -23,7 +23,7 @@ public class TradeService implements ITradeService {
     private final TradeRepository tradeRepository;
     private final ValidationService validationService;
 
-    TradeService(TradeRepository tradeRepository, ValidationService validationService) {
+    public TradeService(TradeRepository tradeRepository, ValidationService validationService) {
         this.tradeRepository = tradeRepository;
         this.validationService = validationService;
     }

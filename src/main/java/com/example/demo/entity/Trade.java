@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "trades")
 public class Trade {
 
@@ -43,6 +44,7 @@ public class Trade {
 
     private String type;
 
+    @Column(name = "`year`")
     private String year;
 
     private Integer mileage;
